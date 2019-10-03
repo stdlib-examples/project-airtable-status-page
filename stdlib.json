@@ -1,7 +1,12 @@
 {
   "build": "faaslang",
-  "name": "kevinb/statusPage",
+  "name": "jacoblee/statusPage",
   "timeout": 40000,
+  "events": [{
+    "scheduler.minutely": {
+      "filename": "events/scheduler/minutely.js"
+    }
+  }],
   "env": [
     {
       "name": "LOGO_URL",

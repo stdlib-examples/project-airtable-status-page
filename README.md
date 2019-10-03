@@ -8,7 +8,7 @@ Using [Standard Library's](https://stdlib.com) task scheduling API alongside Air
 
 ## **Deploying this Application**
 ***
-First, make sure that you have a Standard Library account, as well as an Airtable account. Once you have those, add [this base](https://airtable.com/addBaseFromShare/shrQLyQ6TOa9txVXT) to Airtable, and populate the URL and Descriptions columns accordingly. It will end up looking something like this:
+First, make sure that you have a Standard Library account, as well as an Airtable account. Once you have those, add [this base](https://airtable.com/addBaseFromShare/shrZZOaBfrbnLGGJN) to Airtable, and populate the URL and Descriptions columns accordingly. It will end up looking something like this:
 
 ![Table](/readme/images/sites.png)
 
@@ -20,60 +20,6 @@ This will form the bulk of the logic that will be responsible for populating our
 
 Once you have linked your Airtable account and selected the Status Page base that we created earlier, you are ready to configure your workflow APIs. On the **Configure Workflow APIs** tab, click on the **Developer Mode** button, and replace the code that you are able to edit with the snippet below.
 
-```
-if(new Date().getMinutes() % 10 !== 0) {
-    return;
-  }
-  
-  let workflow = {};
-  
-  // [Workflow Step 1]
-  
-  console.log(`Running airtable.query[@0.3.3].select()...`);
-  
-  workflow.selectQueryResult = await lib.airtable.query['@0.3.3'].select({
-    table: `URIs`,
-    where: [
-      {}
-    ],
-    limit: {
-      'count': 0,
-      'offset': 0
-    }
-  });
-  
-  // [Workflow Step 2]
-  
-  console.log(`Running http.request[@0.1.0]()...`);
-  
-  for(let row of workflow.selectQueryResult.rows) {
-    workflow.response = await lib.http.request['@0.1.0']({
-      url: row.fields.URL,
-      options: {}
-    }).catch(err => {
-      console.log(err);
-    });
-    
-    // [Workflow Step 3]
-    
-    if(!workflow.response) {
-      continue;
-    }
-    
-    console.log(`Running airtable.query[@0.3.3].insert()...`);
-    
-    workflow.insertQueryResult = await lib.airtable.query['@0.3.3'].insert({
-      table: `Log`,
-      fields: {
-        'Duration': workflow.response.timings.phases.total,
-        'Status Code': workflow.response.statusCode,
-        'URL': [row.id]
-      }
-    }).catch(err => {
-      console.log(err);
-    });
-  };
-  ```
 You will need to **Run with Test Event**, and then click on the blue **Next** button. In the final screen you will give your workflow a name and click **Finish**. Our workflow will now populate our Airtable base with logs every ten minutes.
 
 ## **Visualizing Our Status** ##
