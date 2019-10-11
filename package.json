@@ -5,10 +5,10 @@
   "author": "steve",
   "main": "functions/__main__.js",
   "dependencies": {
-    "aws-sdk": "^2.96.0",
-    "ejs": "^2.5.7",
+    "aws-sdk": "^2.548.0",
+    "ejs": "^2.7.1",
     "lib": "^4.0.5",
-    "mime": "^1.4.0"
+    "mime": "^1.6.0"
   },
   "private": false,
   "devDependencies": {
