@@ -11,7 +11,7 @@
     {
       "name": "LOGO_URL",
       "description": "Insert a link to your logo.",
-      "defaultValue": "https://stdlib.com/static/images/standard-library-logo-wordmark.svg"
+      "defaultValue": "https://content.public.files.stdlib.com/www/static/images/standard-library-logo-wordmark.svg"
     },
     {
       "name": "LATENCY_THRESHOLD",

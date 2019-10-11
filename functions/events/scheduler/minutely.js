@@ -8,7 +8,10 @@ module.exports = async () => {
   let currentDate = new Date();
 
   if (currentDate.getMinutes() % 10 !== 0) {
-    return;
+    return {
+      successful: false,
+      message: 'This API will only check the given URLs every 10 minutes'
+    };
   }
 
   let workflow = {};
@@ -93,6 +96,10 @@ module.exports = async () => {
 
     }
 
+  }
+
+  return {
+    successful: true
   };
 
 };
