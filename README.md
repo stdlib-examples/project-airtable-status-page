@@ -7,7 +7,7 @@ Using [Standard Library's](https://stdlib.com) task scheduling API alongside Air
 ![Screenshot](/readme/images/completed.png)
 
 ## **Deploying this Application**
-***
+
 First, make sure that you have a Standard Library account, as well as an Airtable account. Once you have those, add [this base](https://airtable.com/addBaseFromShare/shrZZOaBfrbnLGGJN) to Airtable, and populate the URL and Descriptions columns accordingly. It will end up looking something like this:
 
 ![Table](/readme/images/sites.png)
@@ -23,7 +23,7 @@ Once you have linked your Airtable account and selected the Status Page base tha
 You will need to **Run with Test Event**, and then click on the blue **Next** button. In the final screen you will give your workflow a name and click **Finish**. Our workflow will now populate our Airtable base with logs every ten minutes.
 
 ## **Visualizing Our Status** ##
-***
+
 [<img src="https://deploy.stdlib.com/static/images/deploy.svg" width="192">](https://deploy.stdlib.com/) <br />
 Now you are ready to click on the the button above to deploy our application. You will find yourself on the following page:
 

@@ -19,7 +19,7 @@ const calculateUptime = data => {
 module.exports = async url => {
   const data = await lib.airtable.query['@0.3.3']
     .select({
-      table: 'Log',
+      table: 'Logs',
       where: [
         {
           Current: 'Yes',

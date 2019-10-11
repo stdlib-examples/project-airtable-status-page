@@ -11,7 +11,7 @@ let app;
 
 function getURLS() {
   return lib.airtable.query['@0.3.4'].select({
-    table: "URIs"
+    table: "URLs"
   }).then(r => {
     return r.rows.map(n => {
       let desc = n.fields.Description || "A Website";

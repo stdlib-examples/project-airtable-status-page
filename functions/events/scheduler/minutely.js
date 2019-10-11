@@ -1,6 +1,7 @@
+const lib = require('lib')({token: process.env.STDLIB_SECRET_TOKEN});
+
 /**
 * An HTTP endpoint that acts as a webhook for Scheduler minutely event
-* @returns {object} result The result of your workflow steps
 */
 module.exports = async () => {
 
@@ -17,7 +18,7 @@ module.exports = async () => {
   console.log(`Running airtable.query[@0.3.4].select()...`);
 
   workflow.urlRows = await lib.airtable.query['@0.3.4'].select({
-    table: `URIs`,
+    table: `URLs`,
     where: [
       {}
     ],
@@ -29,24 +30,9 @@ module.exports = async () => {
 
   // [Workflow Step 2]
 
-  console.log(`Running airtable.query[@0.3.4].count()...`);
-
-  workflow.countQueryResult = await lib.airtable.query['@0.3.4'].count({
-    table: `Log`,
-    where: [
-      {}
-    ],
-    limit: {
-      'count': 0,
-      'offset': 0
-    }
-  });
-
-  // [Workflow Step 3]
-
   console.log(`Running http.request[@0.1.0]()...`);
 
-  for (let i = 0; i < workflow.urlRows.rows.length; i++) {
+  for (let i = 0; i < Math.min(workflow.urlRows.rows.length, 3); i++) {
 
     workflow.response = await lib.http.request['@0.1.0']({
       url: workflow.urlRows.rows[i].fields.URL,
@@ -59,14 +45,12 @@ module.exports = async () => {
       continue;
     }
 
-    // [Workflow Step 4]
-
-    let id = (i * 1008) + ((currentDate.getDay() * 144 + currentDate.getHours() * 6 + Math.floor(currentDate.getMinutes() / 10)) % 1008);
+    let identifier = workflow.urlRows.rows[i].fields.URL + ':' + (currentDate.getDay() * 144 + currentDate.getHours() * 6 + Math.floor(currentDate.getMinutes() / 10));
 
     workflow.selectQueryResult = await lib.airtable.query['@0.3.4'].select({
-      table: `Log`,
+      table: `Logs`,
       where: [{
-        id: id
+        Identifier: identifier
       }]
     });
 
@@ -75,9 +59,9 @@ module.exports = async () => {
       console.log(`Running airtable.query[@0.3.4].update()...`);
 
       workflow.updateQueryResult = await lib.airtable.query['@0.3.4'].update({
-        table: `Log`,
+        table: `Logs`,
         where: [{
-          id: id
+          Identifier: identifier
         }],
         limit: {
           count: 1
@@ -96,9 +80,9 @@ module.exports = async () => {
       console.log(`Running airtable.query[@0.3.4].insert()...`);
 
       workflow.insertQueryResult = await lib.airtable.query['@0.3.4'].insert({
-        table: `Log`,
+        table: `Logs`,
         fields: {
-          'id': id,
+          'Identifier': identifier,
           'Duration': workflow.response.timings.phases.total,
           'Status Code': workflow.response.statusCode,
           'URL': [workflow.urlRows.rows[i].id]
