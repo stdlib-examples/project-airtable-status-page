@@ -7,10 +7,10 @@ module.exports = async () => {
 
   let currentDate = new Date();
 
-  if (currentDate.getMinutes() % 10 !== 0) {
+  if (currentDate.getMinutes() % 20 !== 0) {
     return {
       successful: false,
-      message: 'This API will only check the given URLs every 10 minutes'
+      message: 'This API will only check the given URLs every 20 minutes'
     };
   }
 
@@ -48,7 +48,7 @@ module.exports = async () => {
       continue;
     }
 
-    let identifier = workflow.urlRows.rows[i].fields.URL + ':' + (currentDate.getDay() * 144 + currentDate.getHours() * 6 + Math.floor(currentDate.getMinutes() / 10));
+    let identifier = workflow.urlRows.rows[i].fields.URL + ':' + (currentDate.getDay() * 144 + currentDate.getHours() * 6 + Math.floor(currentDate.getMinutes() / 20));
 
     workflow.selectQueryResult = await lib.airtable.query['@0.3.4'].select({
       table: `Logs`,
