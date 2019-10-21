@@ -60,7 +60,7 @@ module.exports = async url => {
 
     logs[day][hour].push(row.Duration);
 
-    if (logs[day][hour].length === 6) {
+    if (logs[day][hour].length === 3) {
       let total = logs[day][hour].reduce((acc, cur) => {
         acc = acc + cur;
         return acc;
