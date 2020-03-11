@@ -1,6 +1,6 @@
 # **Website Status Page Using Airtable** #
 
-[<img src="https://deploy.stdlib.com/static/images/deploy.svg" width="192">](https://deploy.stdlib.com/)
+[<img src="https://deploy.stdlib.com/static/images/deploy.svg?" width="192">](https://deploy.stdlib.com/)
 
 Using [Standard Library's](https://stdlib.com) task scheduling API alongside Airtable, you can quickly set up and deploy a custom status page to track the performance of your website. Just set up your workflow using [Build](https://build.stdlib.com) on Standard Library, and then click on the Deploy button above, and you will have a real-time status monitoring application like the one pictured below up and running in no time!
 
@@ -24,7 +24,7 @@ You will need to **Run with Test Event**, and then click on the blue **Next** bu
 
 ## **Visualizing Our Status** ##
 
-[<img src="https://deploy.stdlib.com/static/images/deploy.svg" width="192">](https://deploy.stdlib.com/) <br />
+[<img src="https://deploy.stdlib.com/static/images/deploy.svg?" width="192">](https://deploy.stdlib.com/) <br />
 Now you are ready to click on the the button above to deploy our application. You will find yourself on the following page:
 
 ![StatusPage](/readme/images/statusPage.png)
